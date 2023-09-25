@@ -1,0 +1,51 @@
+<style>
+  .modal-content {
+    background-color: #17202A;
+    color: white 
+  }
+</style>
+
+{% for owned_item in owned_items %}
+<div class="modal" id="modal-moreinfo-{{ owned_item.id }}" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ owned_item.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ owned_item.description }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-sellconfirm-{{ owned_item.id }}" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ owned_item.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <h6 class="text-center"><p>Are you sure you want to sell {{ owned_item.name }} for ${{ owned_item.price }}?</p></h6>
+        <form method="POST">
+          <h4 class="text-center">
+          <input id="sold_item" name="sold_item" type="hidden" value="{{ owned_item.name }}">
+          {{ sell_form.hidden_tag() }}
+          {{ sell_form.submit(class="btn btn-outline-success") }}
+          </h4>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </form>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
